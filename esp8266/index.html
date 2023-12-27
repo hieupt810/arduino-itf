@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ESP8266 Control Panel</title>
+    </head>
+
+    <body>
+        <h1>ESP8266 Control Panel</h1>
+
+        <h2>Điều khiển LED</h2>
+        <p id="text"></p>
+        <div>
+            <button onclick="turnOn()">Bật</button>
+            <button onclick="turnOff()">Tắt</button>
+        </div>
+
+        <script>
+            var espServer = "http://172.20.10.8";
+
+            function turnOn() {
+                fetch(espServer + "/led=on")
+                    .then((resp) => {
+                        if (!resp.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        console.log("LED turned on");
+
+                        text = document.getElementById("text");
+                        text.innerHTML = "ON";
+                    })
+                    .catch((err) => console.error(err));
+            }
+
+            function turnOff() {
+                fetch(espServer + "/led=off")
+                    .then((resp) => {
+                        if (!resp.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        console.log("LED turned off");
+
+                        text = document.getElementById("text");
+                        text.innerHTML = "OFF";
+                    })
+                    .catch((err) => console.error(err));
+            }
+        </script>
+    </body>
+</html>
