@@ -16,3 +16,5 @@ void loop() {
     BTSerial.write(Serial.read());
   }
 }
+// 0022:09:011326
+// 0022:12:016611
